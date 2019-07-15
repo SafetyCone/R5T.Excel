@@ -1,0 +1,5 @@
+﻿R5T.Excel - A library for Excel functionality.
+
+The library uses Excel COM automation through the primary interop assembly (PIA).
+
+NOTE! This library is a .NET Standard library, however, Excel COM automation only works if the entry-point application uses the .NET Framework. Note also that Excel COM automation (like all COM automation) is Windows-only. Thus is it not really a problem that the .NET Standard library can only be consumed from .NET Framework, which only exists on Windows.

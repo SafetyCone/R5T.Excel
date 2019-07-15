@@ -1,0 +1,3 @@
+﻿R5T.Excel.Construction - A construction console-app for the R5T.Excel library.
+
+This construction console-app uses the .NET Framework, since for Excel COM automation, somehow a .NET Core entry-point results in null reference exceptions when reading/writing range values. (The code compiles, and runs, it just results in null reference exceptions when actually trying to get/set range values.)

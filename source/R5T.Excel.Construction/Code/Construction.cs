@@ -7,7 +7,14 @@ namespace R5T.Excel.Construction
     {
         public static void SubMain()
         {
-            Construction.SubMain();
+            Construction.CreateTestWorkbook();
+        }
+
+        private static void CreateTestWorkbook()
+        {
+            var message = "Howdy there!";
+
+            TestClass2.CreateTestWorkbook(message);
         }
     }
 }

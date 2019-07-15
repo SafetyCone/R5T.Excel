@@ -2,4 +2,8 @@
 
 The library uses Excel COM automation through the primary interop assembly (PIA).
 
-NOTE! This library is a .NET Standard library, however, Excel COM automation only works if the entry-point application uses the .NET Framework. Note also that Excel COM automation (like all COM automation) is Windows-only. Thus is it not really a problem that the .NET Standard library can only be consumed from .NET Framework, which only exists on Windows.
+NOTE! This library is a .NET Standard library, which implies cross-platform capabilities if used from a .NET Core application entry-point. However, Excel COM automation only works if the entry-point application uses the .NET Framework, which is Windows-only. However, Excel COM automation (like all COM automation) is Windows-only. Thus is it not really a problem that the .NET Standard library can only be consumed from .NET Framework, which only exists on Windows.
+
+NOTE! The application entry-point bit-ness (x32 or x64) MUST match the installed Excel application bit-ness. Otherwise a cryptic error appears at runtime:
+
+System.InvalidCastException: 'Unable to cast COM object of type 'Microsoft.Office.Interop.Excel.ApplicationClass' to interface type 'Microsoft.Office.Interop.Excel._Application'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{000208D5-0000-0000-C000-000000000046}' failed due to the following error: Invalid class string (Exception from HRESULT: 0x800401F3 (CO_E_CLASSSTRING)).'

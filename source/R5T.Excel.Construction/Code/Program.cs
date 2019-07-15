@@ -7,7 +7,7 @@ namespace R5T.Excel.Construction
     {
         static void Main(string[] args)
         {
-            Construction.
+            Construction.SubMain();
         }
     }
 }

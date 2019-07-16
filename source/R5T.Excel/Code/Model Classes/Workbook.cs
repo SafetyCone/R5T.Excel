@@ -20,14 +20,25 @@ namespace R5T.Excel
 
         public Application Application { get; private set; }
 
-        public string Name
+        /// <summary>
+        /// Set the calculation mode for the workbook.
+        /// </summary>
+        /// <remarks>
+        /// Despite calculation mode being an application-level property, the calculation mode is made a Workbook property since it is an error to change the calculation mode with no workbook present.
+        /// </remarks>
+        public ExcelCalculationMode CalculationMode
         {
             get
             {
-                var output = this.XlWorkbook.Name;
-                return output;
+                var calculationMode = this.Application.XlApplication.Calculation.ToExcelCalculationMode();
+                return calculationMode;
             }
-            // Read-only.
+            set
+            {
+                var xlCalculation = value.ToXlCalculation();
+
+                this.Application.XlApplication.Calculation = xlCalculation;
+            }
         }
         public string FilePath
         {
@@ -45,6 +56,15 @@ namespace R5T.Excel
                 var xlFileFormat = this.XlWorkbook.FileFormat;
                 
                 var output = xlFileFormat.ToExcelFileFormat();
+                return output;
+            }
+            // Read-only.
+        }
+        public string Name
+        {
+            get
+            {
+                var output = this.XlWorkbook.Name;
                 return output;
             }
             // Read-only.

@@ -67,9 +67,20 @@ namespace R5T.Excel
             return namedRange;
         }
 
+        /// <summary>
+        /// Calculate the workbook.
+        /// </summary>
+        /// <remarks>
+        /// Despite the fact the Xl.Workbook type has no calculation method, the application-level calcuation method is placed here since it is an error to calculate without a workbook present.
+        /// </remarks>
         public static void Calculate(this Workbook workbook)
         {
-            workbook.Application.Calculate();
+            workbook.Application.XlApplication.Calculate();
+        }
+
+        public static void Save(this Workbook workbook)
+        {
+            workbook.XlWorkbook.Save();
         }
     }
 }

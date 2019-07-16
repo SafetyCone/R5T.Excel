@@ -45,20 +45,6 @@ namespace R5T.Excel
 
         internal Xl.Application XlApplication { get; private set; }
 
-        public ExcelCalculationMode CalculationMode
-        {
-            get
-            {
-                var calculationMode = this.XlApplication.Calculation.ToExcelCalculationMode();
-                return calculationMode;
-            }
-            set
-            {
-                var xlCalculation = value.ToXlCalculation();
-
-                this.XlApplication.Calculation = xlCalculation;
-            }
-        }
         public bool DisplayAlerts
         {
             get

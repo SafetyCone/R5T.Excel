@@ -8,7 +8,7 @@ namespace R5T.Excel
     /// <summary>
     /// Represents an Excel application.
     /// </summary>
-    public sealed class Application
+    public sealed class Application : IDisposable
     {
         #region IDisposable
 

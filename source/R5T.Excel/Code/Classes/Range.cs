@@ -131,16 +131,16 @@ namespace R5T.Excel
                 return output;
             }
         }
-        public string NumberFormat
+        public double ColumnWidth
         {
             get
             {
-                var numberFormat = Convert.ToString(this.XlRange.NumberFormat);
-                return numberFormat;
+                var columnWidth = Convert.ToDouble(this.XlRange.ColumnWidth);
+                return columnWidth;
             }
             set
             {
-                this.XlRange.NumberFormat = value;
+                this.XlRange.ColumnWidth = value;
             }
         }
         public string Formula
@@ -153,6 +153,18 @@ namespace R5T.Excel
             set
             {
                 this.XlRange.Formula = value;
+            }
+        }
+        public string NumberFormat
+        {
+            get
+            {
+                var numberFormat = Convert.ToString(this.XlRange.NumberFormat);
+                return numberFormat;
+            }
+            set
+            {
+                this.XlRange.NumberFormat = value;
             }
         }
         public Range EndUp
@@ -206,6 +218,14 @@ namespace R5T.Excel
         public void SetName(string name)
         {
             this.Workbook.AddNamedRange(this, name);
+        }
+
+        public Range GetOffset(int rows, int columns)
+        {
+            var xlRange = this.XlRange.Offset[rows, columns];
+
+            var range = new Range(XlRange, this.Worksheet);
+            return range;
         }
     }
 }

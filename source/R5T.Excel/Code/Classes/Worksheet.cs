@@ -79,5 +79,15 @@ namespace R5T.Excel
             var range = new Range(xlRange, this);
             return range;
         }
+
+        public Range GetRange(Range upperLeft, int numberOfRows, int numberOfColumns)
+        {
+            var xlLowerRight = this.XlWorksheet.Cells[upperLeft.Row + numberOfRows - 1, upperLeft.Column + numberOfColumns - 1] as Xl.Range;
+
+            var xlRange = this.XlWorksheet.Range[upperLeft.XlRange, xlLowerRight];
+
+            var range = new Range(xlRange, this);
+            return range;
+        }
     }
 }

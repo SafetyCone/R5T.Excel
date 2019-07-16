@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 
 
 namespace R5T.Excel.Construction
@@ -7,32 +9,71 @@ namespace R5T.Excel.Construction
     {
         public static void SubMain()
         {
-            Construction.CreateTestWorkbook();
+            //Construction.CreateTestWorkbook();
+            Construction.CreateExampleWorkbook();
         }
 
         private static void CreateExampleWorkbook()
         {
-            // Create a new workbook.
+            using (var app = new Application())
+            {
+                // Create a new workbook.
+                var wkbk = app.NewWorkbook();
 
-            // Get the first sheet.
+                // Get the first sheet.
+                var ws = wkbk.GetWorksheet(Constants.Sheet1Name);
 
-            // Test getting/setting object[,] values.
+                // Rename the sheet.
+                ws.Name = "Test Worksheet";
 
-            // Test if range has value (is empty).
+                // Get the A1 range.
+                var a1 = ws.GetA1Range();
 
-            // Change number formats.
+                // Set object array values.
+                var data = new object[4, 2];
+                data[0, 0] = "Machine:"; data[0, 1] = Environment.MachineName;
+                data[1, 0] = "User:"; data[1, 1] = Environment.UserDomainName + Path.DirectorySeparatorChar + Environment.UserName;
+                data[2, 0] = "DateTime:"; data[2, 1] = DateTime.UtcNow;
+                data[3, 0] = "Process Name:"; data[3, 1] = Assembly.GetEntryAssembly().FullName;
 
-            // Set named range.
+                var upperLeft = a1;
+                var size = new RangeSize().SetFrom(data);
+                var dataRange = upperLeft.GetRange(size);
+                dataRange.Values = data;
 
-            // Set named range values.
+                // Set column widths.
+                var columnWidths = new double[]
+                {
+                    20,
+                    30,
+                };
+                ws.SetColumnWidths(columnWidths);
 
-            // Get named range.
+                // Make row-headers bold.
+                var rowHeadersColumn = dataRange.GetColumn(0);
+                rowHeadersColumn.Bold();
 
-            // Get named range values.
+                // Align values horizontally-left.
+                var valuesColumn = dataRange.GetColumn(1);
+                valuesColumn.AlignHorizontalLeft();
 
-            // Test formulas.
+                // Get object array values.
 
-            // Test formatting: alignment, bold.
+                // Test if range has value (is empty).
+
+                // Change number formats.
+
+                // Set named range.
+                valuesColumn.SetName("Author_Values");
+
+                // Get named range.
+
+                // Test formulas.
+
+                // Save the workbooks.
+                var filePath = @"C:\Temp\temp.xlsx";
+                wkbk.SaveAs(filePath);
+            }
         }
 
         private static void CreateTestWorkbook()

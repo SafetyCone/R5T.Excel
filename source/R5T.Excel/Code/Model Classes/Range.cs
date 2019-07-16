@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Xl = Microsoft.Office.Interop.Excel;
 
@@ -35,12 +36,39 @@ namespace R5T.Excel
                 return row;
             }
         }
+        public int RowCount
+        {
+            get
+            {
+                var rowCount = this.XlRange.Rows.Count;
+                return rowCount;
+            }
+        }
         public int Column
         {
             get
             {
                 var column = this.XlRange.Column;
                 return column;
+            }
+        }
+        public int ColumnCount
+        {
+            get
+            {
+                var columnCount = this.XlRange.Columns.Count;
+                return columnCount;
+            }
+        }
+        public IEnumerable<Range> Cells
+        {
+            get
+            {
+                foreach (Xl.Range xlCell in this.XlRange.Cells)
+                {
+                    var cell = new Range(xlCell, this.Worksheet);
+                    yield return cell;
+                }
             }
         }
         public object Value
@@ -202,6 +230,16 @@ namespace R5T.Excel
             get
             {
                 var xlRange = this.XlRange.End[Xl.XlDirection.xlToRight];
+
+                var range = new Range(xlRange, this.Worksheet);
+                return range;
+            }
+        }
+        public Range this[int row, int column]
+        {
+            get
+            {
+                var xlRange = this.XlRange[row + 1, column + 1] as Xl.Range; // Excel is 1-based.
 
                 var range = new Range(xlRange, this.Worksheet);
                 return range;

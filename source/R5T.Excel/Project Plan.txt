@@ -7,3 +7,20 @@ NOTE! This library is a .NET Standard library, which implies cross-platform capa
 NOTE! The application entry-point bit-ness (x32 or x64) MUST match the installed Excel application bit-ness. Otherwise a cryptic error appears at runtime:
 
 System.InvalidCastException: 'Unable to cast COM object of type 'Microsoft.Office.Interop.Excel.ApplicationClass' to interface type 'Microsoft.Office.Interop.Excel._Application'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{000208D5-0000-0000-C000-000000000046}' failed due to the following error: Invalid class string (Exception from HRESULT: 0x800401F3 (CO_E_CLASSSTRING)).'
+
+
+Excel Data Model Wrapper Class Design
+
+For the Application, Workbook, Worksheet, and Range types:
+
+* The Excel data model type is an internal property.
+* The wrapper type's parent wrapper type is a public property.
+* Constructors are internal (except for Application) to emphasize that all types and instances come from the Application.
+* Properties go on the class. C# does not have extension 
+* Operations involving (having inputs/outputs) Microsoft.Office.Interop.Excel types are internal to avoid clients needing to take a directory dependency on the interop type.
+* As many operations as possible go in extension methods! Note, an operation should be implemented as an extension method unless there is a specific reason why it should go on the class. This is to avoid cluttering the class.
+* Internal operations can be extension methods too!
+* The fundamental generation methods go on the type (like getting workbooks from the application, or worksheets from the workbook).
+* Other fundamental methods (like Quit(), SaveAs(), etc.) go on the class.
+* Access to higher-level model type instances goes on the class (e.g. accessing the Application instance from a Range instance).
+* Select methods go on the class (these allow the Excel model type instance to become the "active" instance).

@@ -214,18 +214,5 @@ namespace R5T.Excel
             this.XlRange = xlRange;
             this.Worksheet = worksheet;
         }
-
-        public void SetName(string name)
-        {
-            this.Workbook.AddNamedRange(this, name);
-        }
-
-        public Range GetOffset(int rows, int columns)
-        {
-            var xlRange = this.XlRange.Offset[rows, columns];
-
-            var range = new Range(XlRange, this.Worksheet);
-            return range;
-        }
     }
 }

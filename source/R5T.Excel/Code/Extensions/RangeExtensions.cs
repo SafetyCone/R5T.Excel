@@ -35,5 +35,18 @@ namespace R5T.Excel
 
             throw new Exception();
         }
+
+        public static void SetName(this Range range, string name)
+        {
+            range.Workbook.AddNamedRange(range, name);
+        }
+
+        public static Range GetOffset(this Range range, int rows, int columns)
+        {
+            var xlRange = range.XlRange.Offset[rows, columns];
+
+            var offsetRange = new Range(xlRange, range.Worksheet);
+            return offsetRange;
+        }
     }
 }

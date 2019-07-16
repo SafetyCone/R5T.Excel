@@ -57,21 +57,6 @@ namespace R5T.Excel
             this.XlWorksheet.Activate();
         }
 
-        public void Show()
-        {
-            this.XlWorksheet.Visible = Xl.XlSheetVisibility.xlSheetVisible;
-        }
-
-        public void Hide()
-        {
-            this.XlWorksheet.Visible = Xl.XlSheetVisibility.xlSheetHidden;
-        }
-
-        public void HideVeryHidden()
-        {
-            this.XlWorksheet.Visible = Xl.XlSheetVisibility.xlSheetVeryHidden;
-        }
-
         public Range GetA1Range()
         {
             var xlRange = this.XlWorksheet.Cells[1, 1] as Xl.Range;

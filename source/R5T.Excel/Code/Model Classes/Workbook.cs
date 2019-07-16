@@ -70,7 +70,6 @@ namespace R5T.Excel
         }
 
 
-
         internal Workbook(Xl.Workbook xlWorkbook, Application application)
         {
             this.XlWorkbook = xlWorkbook;
@@ -116,21 +115,6 @@ namespace R5T.Excel
             return worksheet;
         }
 
-        public bool HasWorksheet(string name)
-        {
-            var output = false;
-            foreach (Xl.Worksheet worksheet in this.XlWorkbook.Worksheets)
-            {
-                if(name == worksheet.Name)
-                {
-                    output = true;
-                    break;
-                }
-            }
-
-            return output;
-        }
-
         public Worksheet GetWorksheet(string name)
         {
             var xlWorksheet = this.XlWorkbook.Worksheets[name] as Xl.Worksheet;
@@ -149,11 +133,6 @@ namespace R5T.Excel
 
             var worksheet = new Worksheet(xlWorksheet, this);
             return worksheet;
-        }
-
-        public void AddNamedRange(Range range, string name)
-        {
-            this.XlWorkbook.Names.Add(name, range.XlRange);
         }
     }
 }

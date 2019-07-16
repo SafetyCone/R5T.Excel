@@ -79,5 +79,12 @@ namespace R5T.Excel
 
             excelApp.Quit();
         }
+
+        private static void Test()
+        {
+            //XL.Range range;
+
+            //range.end
+        }
     }
 }

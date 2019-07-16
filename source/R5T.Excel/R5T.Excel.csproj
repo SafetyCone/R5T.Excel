@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\R5T.NetStandard.Types\source\R5T.NetStandard.Types\R5T.NetStandard.Types.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Interop.Microsoft.Office.Interop.Excel">
       <HintPath>..\..\binaries\Interop.Microsoft.Office.Interop.Excel.dll</HintPath>
     </Reference>

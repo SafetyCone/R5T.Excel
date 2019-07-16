@@ -7,6 +7,11 @@ namespace R5T.Excel
 {
     public static class RangeExtensions
     {
+        public static void Calculate(this Range range)
+        {
+            range.XlRange.Calculate();
+        }
+
         /// <summary>
         /// Gets a range of the specified size with this range as the upper-left corner.
         /// </summary>

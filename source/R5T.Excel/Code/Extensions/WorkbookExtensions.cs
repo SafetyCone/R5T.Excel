@@ -58,7 +58,18 @@ namespace R5T.Excel
 
         public static Range GetNamedRange(this Workbook workbook, string name)
         {
+            var xlName = workbook.XlWorkbook.Names.Item(name);
+            var xlNamedRange = xlName.RefersToRange;
+            var xlWorksheet = xlNamedRange.Worksheet;
 
+            var worksheet = new Worksheet(xlWorksheet, workbook);
+            var namedRange = new Range(xlNamedRange, worksheet);
+            return namedRange;
+        }
+
+        public static void Calculate(this Workbook workbook)
+        {
+            workbook.Application.Calculate();
         }
     }
 }

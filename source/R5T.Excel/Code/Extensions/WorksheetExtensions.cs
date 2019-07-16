@@ -7,6 +7,11 @@ namespace R5T.Excel
 {
     public static class WorksheetExtensions
     {
+        public static void Calculate(this Worksheet worksheet)
+        {
+            worksheet.XlWorksheet.Calculate();
+        }
+
         public static void Show(this Worksheet worksheet)
         {
             worksheet.XlWorksheet.Visible = Xl.XlSheetVisibility.xlSheetVisible;

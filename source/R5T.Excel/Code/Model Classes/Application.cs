@@ -121,7 +121,7 @@ namespace R5T.Excel
         }
 
         /// <summary>
-        /// Identical to <see cref="Application.Dispose"/>, but allows for use outside of a using statment.
+        /// Identical to <see cref="Application.Dispose()"/>, but allows for use outside of a using statment.
         /// </summary>
         public void Quit()
         {

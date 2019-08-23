@@ -9,4 +9,9 @@
   <ItemGroup>
     <PackageReference Include="R5T.NetStandard.Types" Version="0.0.2" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Interop.Microsoft.Office.Interop.Excel">
+      <HintPath>..\..\binaries\Interop.Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>
